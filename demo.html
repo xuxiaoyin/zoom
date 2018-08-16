@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+</head>
+<style>
+img{ display: block; width: 300px; margin: 20px auto; transition: 1s;}
+</style>
+<script>
+$(function(){
+	$('#img1').on('zoomIn',function(){
+		$('#img1').css('width',100);
+	});
+	$('#img1').on('zoomOut',function(){
+		$('#img1').css('width',500);
+	});
+	
+	$('#img1').on('mousewheel DOMMouseScroll',function(ev){
+		var delta=(ev.originalEvent.wheelDelta && (ev.originalEvent.wheelDelta>0?1:-1)) || 
+			(ev.originalEvent.detail && (ev.originalEvent.detail>0?-1:1));		
+			if(delta>0){
+				$(this).trigger('zoomOut');
+			}else if(delta<0){
+				$(this).trigger('zoomIn');
+			}
+	});
+})
+</script>
+<body>
+	<div class="box">
+		<img src="6.jpg"  id="img1"/>
+	</div>
+</body>
+</html>
